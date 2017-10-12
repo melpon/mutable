@@ -11,6 +11,8 @@ Mutable.run([x: 10], fn ->
   assert 10 == Mutable.get(:x)
   Mutable.put(:x, 20)
   assert 20 == Mutable.get(:x)
+  Mutable.update(:x, &(&1 + 1))
+  assert 21 == Mutable.get(:x)
 end)
 ```
 

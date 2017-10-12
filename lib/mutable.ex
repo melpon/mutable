@@ -59,4 +59,11 @@ defmodule Mutable do
         old_value
     end
   end
+
+  def update(key, fun) do
+    value = get(key)
+    new_value = fun.(value)
+    put(key, new_value)
+    {new_value, value}
+  end
 end

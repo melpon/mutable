@@ -71,4 +71,11 @@ defmodule MutableTest do
 
     assert [] == Mutable.get()
   end
+
+  test "update/2 updates a value" do
+    Mutable.run([x: 10], fn ->
+      assert {11, 10} == Mutable.update(:x, &(&1 + 1))
+      assert 11 == Mutable.get(:x)
+    end)
+  end
 end
