@@ -11,6 +11,7 @@ defmodule MutableTest do
       Mutable.run([], fn ->
         100
       end)
+
     assert 100 == result
   end
 
@@ -32,9 +33,11 @@ defmodule MutableTest do
   test "When get/0 is called in Mutable.run/1, all values are returned" do
     Mutable.run([x: 10, y: 20], fn ->
       assert Keyword.equal?([x: 10, y: 20], Mutable.get())
+
       Mutable.run([y: 30, z: 40], fn ->
         assert Keyword.equal?([x: 10, y: 30, z: 40], Mutable.get())
       end)
+
       assert Keyword.equal?([x: 10, y: 20], Mutable.get())
     end)
   end
@@ -42,9 +45,11 @@ defmodule MutableTest do
   test "When it comes out of the nest, the original value is restored" do
     Mutable.run([x: 10, y: 20], fn ->
       Mutable.put(:y, 25)
+
       Mutable.run([y: 30, z: 40], fn ->
         :ok
       end)
+
       assert 25 == Mutable.get(:y)
     end)
   end
@@ -54,6 +59,7 @@ defmodule MutableTest do
       Mutable.run([y: 30, z: 40], fn ->
         :ok
       end)
+
       assert_raise KeyError, fn -> Mutable.get(:z) end
     end)
   end

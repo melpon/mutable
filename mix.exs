@@ -6,14 +6,14 @@ defmodule Mutation.Mixfile do
       app: :mutable,
       version: "1.0.1",
       elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       deps: deps(),
       description: "An elixir library that temporarily generates side effects",
       package: [
         maintainers: ["melpon"],
         licenses: ["MIT"],
-        links: %{"GitHub" => "https://github.com/melpon/mutable"},
-      ],
+        links: %{"GitHub" => "https://github.com/melpon/mutable"}
+      ]
     ]
   end
 

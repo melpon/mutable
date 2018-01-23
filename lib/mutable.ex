@@ -28,6 +28,7 @@ defmodule Mutable do
 
   defp pop(key) do
     mkey = {@mutable_key, key}
+
     case Process.get(mkey, @mutable_undefined) do
       @mutable_undefined -> raise KeyError, key: key, term: get()
       [_] -> Process.delete(mkey)
@@ -37,13 +38,16 @@ defmodule Mutable do
 
   def get() do
     Process.get()
-    |> Enum.filter(fn {{@mutable_key, _key}, _values} -> true
-                      _ -> false end)
+    |> Enum.filter(fn
+      {{@mutable_key, _key}, _values} -> true
+      _ -> false
+    end)
     |> Enum.map(fn {{@mutable_key, key}, [value | _]} -> {key, value} end)
   end
 
   def get(key) do
     mkey = {@mutable_key, key}
+
     case Process.get(mkey, @mutable_undefined) do
       @mutable_undefined -> raise KeyError, key: key, term: get()
       [value | _] -> value
@@ -52,8 +56,11 @@ defmodule Mutable do
 
   def put(key, value) do
     mkey = {@mutable_key, key}
+
     case Process.get(mkey, @mutable_undefined) do
-      @mutable_undefined -> raise KeyError, key: key, term: get()
+      @mutable_undefined ->
+        raise KeyError, key: key, term: get()
+
       [old_value | values] ->
         _ = Process.put(mkey, [value | values])
         old_value
