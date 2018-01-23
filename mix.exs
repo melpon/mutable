@@ -24,6 +24,6 @@ defmodule Mutation.Mixfile do
   end
 
   defp deps do
-    [{:ex_doc, "~> 0.16.2", only: :dev}]
+    [{:ex_doc, "~> 0.18.1", only: :dev}]
   end
 end
