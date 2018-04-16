@@ -4,7 +4,7 @@ defmodule Mutation.Mixfile do
   def project do
     [
       app: :mutable,
-      version: "1.0.2",
+      version: "1.0.3",
       elixir: "~> 1.5",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -24,6 +24,6 @@ defmodule Mutation.Mixfile do
   end
 
   defp deps do
-    [{:ex_doc, "~> 0.18.1", only: :dev}]
+    [{:ex_doc, "~> 0.18.3", only: :dev}]
   end
 end
